@@ -57,3 +57,15 @@ regressor_OLS.summary() # Gera uma tabela no console, procurar valores P
 X_opt = X[:, [0, 3]] # Passo 4 - Removendo o preditor
 regressor_OLS = sm.OLS(endog = y, exog = X_opt).fit() # Passo 5 - Treinando o novo modelo
 regressor_OLS.summary() # Gera uma tabela no console, procurar valores P
+
+"""Metodo automatico pra calcular pval
+
+# Getting F and P Values
+from sklearn.feature_selection import f_regression
+F, pval = f_regression(X_train, y_train)
+
+# Excluding features with low P value
+X_train = X_train[:, pval > 0.05]
+X_test = X_test[:, pval > 0.05]
+
+"""

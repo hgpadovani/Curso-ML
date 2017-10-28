@@ -1,4 +1,4 @@
-# Regressão Polinomial
+# Regressao Polinomial
 
 # Importando as bibliotecas
 import numpy as np
@@ -27,10 +27,12 @@ from sklearn.linear_model import LinearRegression
 lin_reg = LinearRegression()
 lin_reg.fit(X, y)
 
-#Criando o modelo de regressão polinomial
+#Criando o modelo de regressão polinomial - fornecer features polinomiais para LR
 from sklearn.preprocessing import PolynomialFeatures
 poly_reg = PolynomialFeatures(degree = 4)
 X_poly = poly_reg.fit_transform(X)
+
+#criando regress�o polinomial
 lin_reg_2 = LinearRegression()
 lin_reg_2.fit(X_poly, y)
 
@@ -43,8 +45,8 @@ plt.ylabel('Salary')
 plt.show()
 
 # Visualização do modelo de regressão polinomial
-#X_grid = np.arange(min(X), max(X), 0.1)
-#X_grid = X_grid.reshape((len(X_grid), 1))
+X_grid = np.arange(min(X), max(X), 0.1)
+X_grid = X_grid.reshape((len(X_grid), 1))
 plt.scatter(X, y, color = 'red')
 plt.plot(X, lin_reg_2.predict(poly_reg.fit_transform(X)), color = 'blue')
 plt.title('Truth or Bluff (Polynomial Regression)')

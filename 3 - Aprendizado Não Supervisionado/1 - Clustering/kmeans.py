@@ -24,7 +24,7 @@ plt.ylabel('WCSS')
 plt.show()
 
 # Aplicando Kmeans
-kmeans = KMeans(n_clusters = 5, init = 'k-means++', max_iter = 300, n_init = 10, random_state = 0)
+kmeans = KMeans(n_clusters = 3, init = 'k-means++', max_iter = 300, n_init = 10, random_state = 0)
 y_kmeans = kmeans.fit_predict(X)
 
 # Plotando os clusters

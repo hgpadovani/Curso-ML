@@ -17,6 +17,7 @@ from keras.layers import Convolution2D
 from keras.layers import MaxPooling2D
 from keras.layers import Flatten
 from keras.layers import Dense
+from keras.layers import Dropout
 
 # Inicializando a Rede
 classifier = Sequential()
@@ -29,7 +30,7 @@ classifier.add(Convolution2D(32, 3, 3, input_shape = (64, 64, 3), activation = '
 # Passo 2 - Pooling
 # 2x2 - Tamanho da forma de pooling
 classifier.add(MaxPooling2D(pool_size = (2, 2)))
-
+classifier.add(Dropout(0.4))
 # Adicionando uma segunda camada de convolução e maxpooling
 classifier.add(Convolution2D(32, 3, 3, activation = 'relu')) # não é necessário informar input_shape
 classifier.add(MaxPooling2D(pool_size = (2, 2)))
@@ -63,14 +64,21 @@ training_set = train_datagen.flow_from_directory('dataset/training_set',
                                                  batch_size=32, # Número de imagens simultâneas na CNN
                                                  class_mode='binary') # 2 classes
 
-test_set = test_datagen.flow_from_directory('dataset/test_set',
+test_set = test_datagen.flow_from_directory('dataset/test_set/new,
                                              target_size=(64, 64),
                                              batch_size=32,
                                              class_mode='binary')
 
+new_example = test_datagen('dataset/test_set/new/,
+                                             target_size=(64, 64),
+                                             batch_size=32,
+                                             class_mode='binary'))
+
 # Treinando a rede
 classifier.fit_generator(training_set,
                          steps_per_epoch=8000/32, # samples_per_epoch/batch_size
-                         epochs=1,
+                         epochs=10,
                          validation_data=test_set,
                          validation_steps=2000/32)
+
+classifier.predict(new_example)

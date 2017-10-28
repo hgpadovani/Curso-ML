@@ -27,8 +27,8 @@ from sklearn.model_selection import train_test_split
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 0)
 
 # Fitting XGBoost to the Training set
-from xgboost import XGBClassifier
-classifier = XGBClassifier()
+from sklearn.ensemble import GradientBoostingClassifier as gbc
+classifier = gbc()
 classifier.fit(X_train, y_train)
 
 # Predicting the Test set results
