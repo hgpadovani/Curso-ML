@@ -64,15 +64,11 @@ training_set = train_datagen.flow_from_directory('dataset/training_set',
                                                  batch_size=32, # Número de imagens simultâneas na CNN
                                                  class_mode='binary') # 2 classes
 
-test_set = test_datagen.flow_from_directory('dataset/test_set/new,
+test_set = test_datagen.flow_from_directory('dataset/test_set',
                                              target_size=(64, 64),
                                              batch_size=32,
                                              class_mode='binary')
 
-new_example = test_datagen('dataset/test_set/new/,
-                                             target_size=(64, 64),
-                                             batch_size=32,
-                                             class_mode='binary'))
 
 # Treinando a rede
 classifier.fit_generator(training_set,
@@ -81,4 +77,4 @@ classifier.fit_generator(training_set,
                          validation_data=test_set,
                          validation_steps=2000/32)
 
-classifier.predict(new_example)
+classifier.predict_generator(new_example)
